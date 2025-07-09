@@ -5,7 +5,7 @@
 ### 1. Clone the repo
 
 ```bash
-git clone https://github.com/PrivateCaptcha/self-hosting private-captcha
+git clone https://github.com/PrivateCaptcha/self-hosting.git private-captcha
 cd private-captcha
 ```
 
