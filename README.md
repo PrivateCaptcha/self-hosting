@@ -23,7 +23,7 @@ Some notes on environment variables:
 <details>
 <summary>Tips for local use</summary>
 
-To run Private Captcha only locally, use `privatecaptcha.local:8080` instead of `yourdomain.com`. To make it work, you need to add few lines to `/etc/hosts` file:
+To run Private Captcha only locally, use `privatecaptcha.local:8080` instead of `yourdomain.com`. To make it work, you need to add a few lines to `/etc/hosts` file:
 
 ```
 127.0.0.1       portal.privatecaptcha.local
@@ -45,6 +45,10 @@ services:
     ports:
       - 8080:8080
 ```
+
+### 4. Done! - navigate to the Portal
+
+Now you can open `$PC_PORTAL_BASE_URL` (e.g. `portal.yourdomain.com`) in browser and log in.
 
 ## Advanced configuration
 
