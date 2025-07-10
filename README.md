@@ -6,6 +6,8 @@ Private Captcha is free for non-commercial use (community edition). Commercial u
 
 ## Quick start
 
+> Please visit the [official quickstart docs](https://docs.privatecaptcha.com/docs/deployment/quickstart/) for up-to-date instructions.
+
 ### 1. Clone the repo
 
 ```bash
@@ -23,6 +25,7 @@ Some notes on environment variables:
 
 - `PC_USER_FINGERPRINT_KEY` you can generate using `openssl rand -hex 64`
 - `PC_ADMIN_EMAIL` will be used to create actual admin account (see note for local use below)
+- `PC_RATE_LIMIT_HEADER` should be the header containing actual client IP (comes from your CDN or reverse proxy)
 
 <details>
 <summary>Tips for local use</summary>
