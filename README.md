@@ -1,5 +1,9 @@
 # Private Captcha self-hosting
 
+## Legal
+
+Private Captcha is free for non-commercial use (community edition). Commercial use (enterprise edition) is a subject to [EULA](https://privatecaptcha.com/legal/eula/) and requires obtaining a license.
+
 ## Quick start
 
 ### 1. Clone the repo
@@ -56,7 +60,7 @@ Please refer to the [official documentation](https://docs.privatecaptcha.com) wh
 
 ## Enterprise edition
 
-There are few changes you will need to make using a `compose.override.yml` file, namely replace `privatecaptcha` image to `privatecaptcha-ee` and set an additional environment variable `EE_LICENSE_KEY`.
+There are a few changes you will need to make using a `compose.override.yml` file, namely replace `privatecaptcha` image to `privatecaptcha-ee` and set an additional environment variable `EE_LICENSE_KEY`.
 
 ```yaml
 services:
