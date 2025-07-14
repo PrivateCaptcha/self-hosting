@@ -6,7 +6,7 @@ Private Captcha is free for non-commercial use (community edition). Commercial u
 
 ## Quick start
 
-> Please visit the [official quickstart docs](https://docs.privatecaptcha.com/docs/deployment/quickstart/) for up-to-date instructions.
+> **NOTE:** Please visit the [official quickstart docs](https://docs.privatecaptcha.com/docs/deployment/quickstart/) for up-to-date instructions.
 
 ### 1. Clone the repo
 
@@ -27,8 +27,10 @@ Some notes on environment variables:
 - `PC_ADMIN_EMAIL` will be used to create actual admin account (see note for local use below)
 - `PC_RATE_LIMIT_HEADER` should be the header containing actual client IP (comes from your CDN or reverse proxy)
 
+You can find full documentation about environment variables [here](https://docs.privatecaptcha.com/docs/deployment/configuration/).
+
 <details>
-<summary>Tips for <i>local</i> use</summary>
+<summary><strong>Tips for local use</strong></summary>
 
 To run Private Captcha only locally, use `privatecaptcha.local:8080` instead of `yourdomain.com`. To make it work, you need to add a few lines to `/etc/hosts` file:
 
@@ -63,14 +65,14 @@ Please refer to the [official documentation](https://docs.privatecaptcha.com) wh
 
 ## Enterprise edition
 
-There are a few changes you will need to make using a `compose.override.yml` file, namely replace `privatecaptcha` image to `privatecaptcha-ee` and set an additional environment variable `EE_LICENSE_KEY`.
+There are a few changes you will need to make using a `compose.override.yml` file, namely replace `privatecaptcha` image to `privatecaptcha-ee` and set an additional environment variable `EE_LICENSE_KEY` (which you should do in the `.env` file).
 
 ```yaml
 services:
   privatecaptcha:
     image: ghcr.io/privatecaptcha/privatecaptcha-ee:latest
     environment:
-      - EE_LICENSE_KEY=qwerty
+      - EE_LICENSE_KEY=${EE_LICENSE_KEY}
   migration:
     image: ghcr.io/privatecaptcha/privatecaptcha-ee:latest
 ```
