@@ -28,7 +28,7 @@ Some notes on environment variables:
 - `PC_RATE_LIMIT_HEADER` should be the header containing actual client IP (comes from your CDN or reverse proxy)
 
 <details>
-<summary>Tips for local use</summary>
+<summary>Tips for <i>local</i> use</summary>
 
 To run Private Captcha only locally, use `privatecaptcha.local:8080` instead of `yourdomain.com`. To make it work, you need to add a few lines to `/etc/hosts` file:
 
@@ -68,9 +68,9 @@ There are a few changes you will need to make using a `compose.override.yml` fil
 ```yaml
 services:
   privatecaptcha:
-    image: ghcr.io/privatecaptcha/privatecaptcha-ee
+    image: ghcr.io/privatecaptcha/privatecaptcha-ee:latest
     environment:
       - EE_LICENSE_KEY=qwerty
   migration:
-    image: ghcr.io/privatecaptcha/privatecaptcha-ee
+    image: ghcr.io/privatecaptcha/privatecaptcha-ee:latest
 ```
