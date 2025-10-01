@@ -1,6 +1,6 @@
 services:
   privatecaptcha:
-    image: ghcr.io/privatecaptcha/privatecaptcha:v0.0.13
+    image: ghcr.io/privatecaptcha/privatecaptcha:v0.0.15
     depends_on:
       migration:
         condition: service_completed_successfully
@@ -38,7 +38,7 @@ services:
       - server_network
 
   migration:
-    image: ghcr.io/privatecaptcha/privatecaptcha:v0.0.13
+    image: ghcr.io/privatecaptcha/privatecaptcha:v0.0.15
     command:
       /app/server -mode migrate -migrate-hash ignore
     environment:
