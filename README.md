@@ -6,7 +6,11 @@ Private Captcha is free for non-commercial use (community edition). Commercial u
 
 ## Quick start
 
-> **NOTE:** Please visit the [official quickstart docs](https://docs.privatecaptcha.com/docs/deployment/quickstart/) for up-to-date instructions.
+> <mark>**NOTE:** Please visit the [official quickstart docs](https://docs.privatecaptcha.com/docs/deployment/quickstart/) for up-to-date instructions.</mark>
+
+---
+
+## Basic instructions
 
 ### 1. Clone the repo
 
@@ -19,15 +23,10 @@ cd private-captcha
 
 ```bash
 cp .env.example .env
+$EDITOR .env
 ```
 
-Some notes on environment variables:
-
-- `PC_USER_FINGERPRINT_KEY` you can generate using `openssl rand -hex 64`
-- `PC_ADMIN_EMAIL` will be used to create actual admin account (see note for local use below)
-- `PC_RATE_LIMIT_HEADER` should be the header containing actual client IP (comes from your CDN or reverse proxy)
-
-You can find full documentation about environment variables [here](https://docs.privatecaptcha.com/docs/deployment/configuration/).
+Now edit `.env` file to set your values. You can find full documentation about environment variables [here](https://docs.privatecaptcha.com/docs/deployment/configuration/).
 
 <details>
 <summary><strong>Tips for local use</strong></summary>
@@ -44,20 +43,17 @@ To run Private Captcha only locally, use `privatecaptcha.local:8080` instead of 
 
 </details>
 
-### 3. (optional) Expose port
+### 3. Run the stack
 
-If you want to use use Docker networking directly (which is not recommended) instead of reverse proxy like Nginx or Caddy, you can create a `compose.override.yml` file like this:
-
-```yaml
-services:
-  privatecaptcha:
-    ports:
-      - 8080:8080
+```bash
+docker compose up
 ```
 
-### 4. Done! - navigate to the Portal
+### 4. Navigate to the Portal
 
-Now you can open `$PC_PORTAL_BASE_URL` (e.g. `portal.yourdomain.com`) in browser and log in.
+Now you can open `$PC_PORTAL_BASE_URL` (e.g. `portal.yourdomain.com` or `http://portal.privatecaptcha.local`) in browser and log in.
+
+> NOTE: For local-only use, when asked for a verification code, you might need to find it in the logs of `privatecaptcha` container. Search for "two factor code".
 
 ## Advanced configuration
 

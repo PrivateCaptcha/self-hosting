@@ -27,6 +27,7 @@ services:
       - SMTP_PASSWORD=${SMTP_PASSWORD}
       # ---- optional ----
       - PC_LOCAL_ADDRESS
+      - PC_LOCAL_API_KEY
       - PC_REGISTRATION_ALLOWED
       - PC_HEALTHCHECK_INTERVAL
       - PC_RATE_LIMIT_RPS
