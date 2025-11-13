@@ -6,27 +6,18 @@ Private Captcha is free for non-commercial use (community edition). Commercial u
 
 ## Quick start
 
-> <mark>**NOTE:** Please visit the [official quickstart docs](https://docs.privatecaptcha.com/docs/deployment/quickstart/) for up-to-date instructions.</mark>
+> <mark>**NOTE:** Please visit the [official quickstart docs](https://docs.privatecaptcha.com/docs/deployment/quickstart/) for detailed up-to-date instructions.</mark>
 
----
-
-## Basic instructions
-
-### 1. Clone the repo
+Clone this repository, create your `.env` file based on the example file (check [docs](https://docs.privatecaptcha.com/docs/deployment/configuration/) for all options) and start the stack.
 
 ```bash
 git clone https://github.com/PrivateCaptcha/self-hosting.git private-captcha
 cd private-captcha
+cp .env.example .env && $EDITOR .env
+docker compose up
 ```
 
-### 2. Create `.env` file
-
-```bash
-cp .env.example .env
-$EDITOR .env
-```
-
-Now edit `.env` file to set your values. You can find full documentation about environment variables [here](https://docs.privatecaptcha.com/docs/deployment/configuration/).
+Now you can open `$PC_PORTAL_BASE_URL` (e.g. `portal.yourdomain.com` or `http://portal.privatecaptcha.local:8080`) in browser and log in.
 
 <details>
 <summary><strong>Tips for local use</strong></summary>
@@ -43,21 +34,9 @@ To run Private Captcha only locally, use `privatecaptcha.local:8080` instead of 
 
 </details>
 
-### 3. Run the stack
+## Updating
 
-```bash
-docker compose up
-```
-
-### 4. Navigate to the Portal
-
-Now you can open `$PC_PORTAL_BASE_URL` (e.g. `portal.yourdomain.com` or `http://portal.privatecaptcha.local`) in browser and log in.
-
-> NOTE: For local-only use, when asked for a verification code, you might need to find it in the logs of `privatecaptcha` container. Search for "two factor code".
-
-## Advanced configuration
-
-Please refer to the [official documentation](https://docs.privatecaptcha.com) which contains descriptions of all configuration options.
+Please refer to the [official documentation](https://docs.privatecaptcha.com/docs/deployment/updating/) for applying updates.
 
 ## Enterprise edition
 
