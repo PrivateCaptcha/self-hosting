@@ -1,6 +1,6 @@
 services:
   privatecaptcha:
-    image: ghcr.io/privatecaptcha/privatecaptcha:v0.0.21
+    image: ghcr.io/privatecaptcha/privatecaptcha:v0.0.22
     depends_on:
       migration:
         condition: service_completed_successfully
@@ -21,7 +21,9 @@ services:
       - PC_EMAIL_FROM=${PC_EMAIL_FROM}
       - PC_RATE_LIMIT_HEADER=${PC_RATE_LIMIT_HEADER}
       - PC_USER_FINGERPRINT_KEY=${PC_USER_FINGERPRINT_KEY}
+      - PC_XSRF_KEY=${PC_XSRF_KEY}
       - PC_API_SALT=${PC_API_SALT}
+      - PC_ID_HASH_SALT=${PC_ID_HASH_SALT}
       - SMTP_ENDPOINT=${SMTP_ENDPOINT}
       - SMTP_USERNAME=${SMTP_USERNAME}
       - SMTP_PASSWORD=${SMTP_PASSWORD}
@@ -39,7 +41,7 @@ services:
       - server_network
 
   migration:
-    image: ghcr.io/privatecaptcha/privatecaptcha:v0.0.21
+    image: ghcr.io/privatecaptcha/privatecaptcha:v0.0.22
     command:
       /app/server -mode migrate -migrate-hash ignore
     environment:
