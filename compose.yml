@@ -93,6 +93,7 @@ services:
       retries: 3
     volumes:
       - ./clickhouse/clickhouse-config.xml:/etc/clickhouse-server/config.d/myconfig.xml:ro
+      - ./clickhouse/clickhouse-users.xml:/etc/clickhouse-server/users.d/myusers.xml:ro
       - clickhouse_data_volume:/var/lib/clickhouse
     ulimits:
       nofile:
