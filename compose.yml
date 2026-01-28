@@ -1,6 +1,7 @@
 services:
   privatecaptcha:
-    image: ghcr.io/privatecaptcha/privatecaptcha:v0.0.27
+    image: ghcr.io/privatecaptcha/privatecaptcha:v1.28.1
+    read_only: true
     depends_on:
       migration:
         condition: service_completed_successfully
@@ -34,6 +35,7 @@ services:
       - PC_HEALTHCHECK_INTERVAL
       - PC_RATE_LIMIT_RPS
       - PC_RATE_LIMIT_BURST
+      - PC_COUNTRY_CODE_HEADER
       - PC_VERBOSE
     networks:
       - postgres_network
@@ -41,7 +43,8 @@ services:
       - server_network
 
   migration:
-    image: ghcr.io/privatecaptcha/privatecaptcha:v0.0.27
+    image: ghcr.io/privatecaptcha/privatecaptcha:v1.28.1
+    read_only: true
     command:
       /app/server -mode migrate -migrate-hash ignore
     environment:
@@ -63,7 +66,7 @@ services:
       - clickhouse_network
 
   postgres:
-    image: postgres:17-alpine
+    image: postgres:18-alpine
     environment:
       POSTGRES_DB: privatecaptcha
       POSTGRES_USER: postgres
@@ -77,10 +80,10 @@ services:
       - postgres_network
     volumes:
       - ./init/postgres.sql:/docker-entrypoint-initdb.d/init.sql:ro
-      - postgres_data_volume:/var/lib/postgresql/data
+      - postgres_data_volume:/var/lib/postgresql/18/main
 
   clickhouse:
-    image: clickhouse/clickhouse-server:24.12.6-alpine
+    image: clickhouse/clickhouse-server:25.6.2-alpine
     environment:
       CLICKHOUSE_DB: privatecaptcha
       CLICKHOUSE_SKIP_USER_SETUP: 1
