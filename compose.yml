@@ -83,7 +83,7 @@ services:
       - postgres_data_volume:/var/lib/postgresql/18/main
 
   clickhouse:
-    image: clickhouse/clickhouse-server:25.6.2-alpine
+    image: clickhouse/clickhouse-server:25.12.4-alpine
     environment:
       CLICKHOUSE_DB: privatecaptcha
       CLICKHOUSE_SKIP_USER_SETUP: 1
