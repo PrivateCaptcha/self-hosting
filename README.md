@@ -38,7 +38,20 @@ To run Private Captcha only locally, use `privatecaptcha.local:8080` instead of 
 
 Please refer to the [official documentation](https://docs.privatecaptcha.com/docs/deployment/updating/) for applying updates.
 
-## Enterprise edition
+## Licensed use
+
+### Community edition
+
+You need to add an additional environment variable `CE_LICENSE_KEY` via `compose.override.yml` file (which you should do in the `.env` file).
+
+```yaml
+services:
+  privatecaptcha:
+    environment:
+      - CE_LICENSE_KEY=${CE_LICENSE_KEY}
+```
+
+### Enterprise edition
 
 There are a few changes you will need to make using a `compose.override.yml` file, namely replace `privatecaptcha` image to `privatecaptcha-ee` and set an additional environment variable `EE_LICENSE_KEY` (which you should do in the `.env` file).
 
