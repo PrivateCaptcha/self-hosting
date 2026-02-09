@@ -42,7 +42,7 @@ Please refer to the [official documentation](https://docs.privatecaptcha.com/doc
 
 ### Community edition
 
-You need to add an additional environment variable `CE_LICENSE_KEY` via `compose.override.yml` file (which you should do in the `.env` file).
+You need to add an additional environment variable `CE_LICENSE_KEY` via `compose.override.yml` file (which you should put in the `.env` file).
 
 ```yaml
 services:
@@ -53,7 +53,7 @@ services:
 
 ### Enterprise edition
 
-There are a few changes you will need to make using a `compose.override.yml` file, namely replace `privatecaptcha` image to `privatecaptcha-ee` and set an additional environment variable `EE_LICENSE_KEY` (which you should do in the `.env` file).
+There are a few changes you will need to make using a `compose.override.yml` file, namely replace `privatecaptcha` image to `privatecaptcha-ee` and set an additional environment variable `EE_LICENSE_KEY` (which you should put in the `.env` file).
 
 ```yaml
 services:
