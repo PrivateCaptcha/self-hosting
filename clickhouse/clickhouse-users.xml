@@ -2,6 +2,8 @@
 <clickhouse>
   <profiles>
     <default>
+      <async_insert>1</async_insert>
+      <wait_for_async_insert>1</wait_for_async_insert>
       <!-- This is needed so that toStartOfMonth() returned DateTime instead of Date -->
       <enable_extended_results_for_datetime_functions>1</enable_extended_results_for_datetime_functions>
       <!-- Wait up to 1000ms. -->
