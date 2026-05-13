@@ -1,6 +1,6 @@
 services:
   privatecaptcha:
-    image: ghcr.io/privatecaptcha/privatecaptcha:v1.33.0
+    image: ghcr.io/privatecaptcha/privatecaptcha:v1.34.0
     read_only: true
     depends_on:
       migration:
@@ -9,6 +9,7 @@ services:
       - 127.0.0.1:8080:8080
     environment:
       - STAGE=prod
+      - CACHE_DIRECTORY=/var/lib/privatecaptcha/cache
       - PC_POSTGRES=postgres://postgres:postgres@postgres:5432/privatecaptcha?search_path=backend
       - PC_CLICKHOUSE_HOST=clickhouse
       - PC_CLICKHOUSE_DB=privatecaptcha
@@ -41,9 +42,11 @@ services:
       - postgres_network
       - clickhouse_network
       - server_network
+    volumes:
+      - cache_data_volume:/var/lib/privatecaptcha/cache
 
   migration:
-    image: ghcr.io/privatecaptcha/privatecaptcha:v1.33.0
+    image: ghcr.io/privatecaptcha/privatecaptcha:v1.34.0
     read_only: true
     command:
       /app/server -mode migrate -migrate-hash ignore
@@ -111,3 +114,4 @@ networks:
 volumes:
   postgres_data_volume:
   clickhouse_data_volume:
+  cache_data_volume:
