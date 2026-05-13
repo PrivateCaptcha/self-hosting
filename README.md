@@ -13,24 +13,26 @@ Clone this repository, create your `.env` file based on the example file (check 
 ```bash
 git clone https://github.com/PrivateCaptcha/self-hosting.git private-captcha
 cd private-captcha
-cp .env.example .env && $EDITOR .env
+cp .env.prod.example .env && $EDITOR .env
 docker compose up
 ```
 
 Now you can open `$PC_PORTAL_BASE_URL` (e.g. `portal.yourdomain.com` or `http://portal.privatecaptcha.local:8080`) in browser and log in.
 
 <details>
-<summary><strong>Tips for local use</strong></summary>
+<summary><strong>Tips for local-only use</strong></summary>
 
-To run Private Captcha only locally, use `privatecaptcha.local:8080` instead of `yourdomain.com`. To make it work, you need to add a few lines to `/etc/hosts` file:
+To run Private Captcha only locally, use `.env.local.example` instead of `.env.prod.example`. After startup, open `http://localhost:8080/portal` URL in browser and log in with `admin@privatecaptcha.local` email.
+
+> NOTE: email with `.local` domain is **not** a valid RFC-5322 address, so for 2FA code (required for login) cannot be sent and you will need to find "two factor code" from docker logs manually
+
+The difference between prod and local setup is mostly that prod is designed to run on 3 separate subdomains (`api.`, `cdn.` and `portal.`) for flexibility. You can easily emulate this locally too if you add a few lines to `/etc/hosts` file:
 
 ```
 127.0.0.1       portal.privatecaptcha.local
 127.0.0.1       api.privatecaptcha.local
 127.0.0.1       cdn.privatecaptcha.local
 ```
-
-> NOTE: email with `.local` domain is **not** a valid RFC-5322 address, so for 2FA code (required for login) you will need to find "two factor code" from docker logs manually
 
 </details>
 
