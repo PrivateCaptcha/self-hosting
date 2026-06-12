@@ -1,6 +1,6 @@
 services:
   privatecaptcha:
-    image: ghcr.io/privatecaptcha/privatecaptcha:v1.35.2
+    image: ghcr.io/privatecaptcha/privatecaptcha:v1.36.0
     read_only: true
     depends_on:
       migration:
@@ -46,7 +46,7 @@ services:
       - cache_data_volume:/var/lib/privatecaptcha/cache
 
   migration:
-    image: ghcr.io/privatecaptcha/privatecaptcha:v1.35.2
+    image: ghcr.io/privatecaptcha/privatecaptcha:v1.36.0
     read_only: true
     command:
       /app/server -mode migrate -migrate-hash ignore
