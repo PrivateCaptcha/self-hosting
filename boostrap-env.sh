@@ -12,8 +12,8 @@ else
   portal_base_url="localhost:8080/portal"
   api_base_url="localhost:8080/api"
   cdn_base_url="localhost:8080/cdn"
-  admin_email="admin@localhost"
-  email_from="no-reply@localhost"
+  admin_email="admin@privatecaptcha.local"
+  email_from="no-reply@privatecaptcha.local"
 fi
 
 cat <<EOF
