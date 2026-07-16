@@ -8,7 +8,7 @@ Private Captcha is free for non-commercial use (community edition). Commercial u
 
 > <mark>**NOTE:** Please visit the [official quickstart docs](https://docs.privatecaptcha.com/docs/deployment/quickstart/) for detailed up-to-date instructions.</mark>
 
-Clone this repository, create your `.env` file based on the example file (check [docs](https://docs.privatecaptcha.com/docs/deployment/configuration/) for all options) and start the stack.
+Clone this repository, create your `.env` file based on the [example file](./.env.prod.example) or [boostrap](./boostrap-env.sh) script (check [docs](https://docs.privatecaptcha.com/docs/deployment/configuration/) for all options) and start the stack.
 
 ```bash
 git clone https://github.com/PrivateCaptcha/self-hosting.git private-captcha
