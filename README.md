@@ -13,16 +13,16 @@ Clone this repository, create your `.env` file based on the [example file](./.en
 ```bash
 git clone https://github.com/PrivateCaptcha/self-hosting.git private-captcha
 cd private-captcha
-cp .env.prod.example .env && $EDITOR .env
+./bootstrap-env.sh mydomain.com > .env
 docker compose up
 ```
 
-Now you can open `$PC_PORTAL_BASE_URL` (e.g. `portal.yourdomain.com` or `http://portal.privatecaptcha.local:8080`) in browser and log in.
+Now you can open `$PC_PORTAL_BASE_URL` (e.g. `portal.mydomain.com`) in browser and log in using admin email (e.g. `admin@mydomain.com`).
 
 <details>
-<summary><strong>Tips for local-only use</strong></summary>
+<summary><strong>Local-only use</strong></summary>
 
-To run Private Captcha only locally, use `.env.local.example` instead of `.env.prod.example`. After startup, open `http://localhost:8080/portal` URL in browser and log in with `admin@privatecaptcha.local` email.
+To run Private Captcha only locally, don't pass any arguments to the bootstrap script (or use `.env.local.example` instead of `.env.prod.example`). After startup, open `http://localhost:8080/portal` URL in browser and log in with `admin@privatecaptcha.local` email.
 
 > NOTE: email with `.local` domain is **not** a valid RFC-5322 address, so for 2FA code (required for login) cannot be sent and you will need to find "two factor code" from docker logs manually
 
