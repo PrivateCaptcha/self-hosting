@@ -71,6 +71,7 @@ services:
   postgres:
     image: postgres:18-alpine
     environment:
+      PGDATA: /var/lib/postgresql/18/main
       POSTGRES_DB: privatecaptcha
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
