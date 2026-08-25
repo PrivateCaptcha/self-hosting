@@ -1,0 +1,105 @@
+#cloud-config
+
+write_files:
+  # ============================================================
+  # EDIT THIS SECTION
+  #
+  # DOMAIN is required.
+  #
+  # SMTP is optional. Uncomment it here, or edit /opt/privatecaptcha/.env later over SSH.
+  # ============================================================
+  - path: /etc/privatecaptcha.conf
+    permissions: '0600'
+    content: |
+      DOMAIN=
+
+      # SMTP_ENDPOINT=smtp://smtp.example.com:587
+      # SMTP_USERNAME=username
+      # SMTP_PASSWORD=password
+
+  - path: /etc/docker/daemon.json
+    defer: true
+    content: |
+      {
+        "log-driver": "journald",
+        "userns-remap": "default"
+      }
+
+  - path: /etc/caddy/Caddyfile
+    defer: true
+    content: |
+      portal.__DOMAIN__, api.__DOMAIN__, cdn.__DOMAIN__ {
+        reverse_proxy 127.0.0.1:8080 {
+          header_up X-Real-IP {remote_host}
+        }
+      }
+
+  - path: /etc/systemd/system/privatecaptcha.service
+    defer: true
+    content: |
+      [Unit]
+      Description=Run Private Captcha
+      After=docker.service
+      Requires=docker.service
+      [Service]
+      Type=oneshot
+      RemainAfterExit=yes
+      WorkingDirectory=/opt/privatecaptcha
+      EnvironmentFile=-/etc/privatecaptcha.conf
+      ExecStart=/usr/bin/docker compose up --detach
+      ExecStop=/usr/bin/docker compose stop
+      [Install]
+      WantedBy=multi-user.target
+
+  - path: /usr/local/sbin/privatecaptcha-bootstrap
+    permissions: '0755'
+    content: |
+      #!/bin/bash
+      set -e
+      . /etc/privatecaptcha.conf
+      [ -n "$DOMAIN" ] || { echo "ERROR: DOMAIN must be configured in /etc/privatecaptcha.conf"; exit 1; }
+      git clone --depth 1 --single-branch https://github.com/PrivateCaptcha/self-hosting.git /opt/privatecaptcha
+      cd /opt/privatecaptcha
+      umask 077
+      ./bootstrap-env.sh "$DOMAIN" > .env
+      sed -i "s/__DOMAIN__/$DOMAIN/g" /etc/caddy/Caddyfile
+
+apt:
+  sources:
+    caddy.list:
+      source: deb https://dl.cloudsmith.io/public/caddy/stable/deb/debian any-version main
+      keyid: 65760C51EDEA2017CEA2CA15155B6D79CA56EA34
+    docker.list:
+      source: deb [arch=amd64] https://download.docker.com/linux/ubuntu $RELEASE stable
+      keyid: 9DC858229FC7DD38854AE2D88D81803C0EBFCD88
+
+package_update: true
+package_upgrade: true
+package_reboot_if_required: true
+
+manage_etc_hosts: localhost
+
+packages:
+  - docker-ce
+  - docker-ce-cli
+  - containerd.io
+  - docker-compose-plugin
+  - git
+  - caddy
+  - ufw
+  - swapspace
+  - unattended-upgrades
+
+runcmd:
+  - update-ca-certificates
+  - privatecaptcha-bootstrap
+  - systemctl restart docker
+  - systemctl daemon-reload
+  - systemctl enable --now privatecaptcha
+  - systemctl restart caddy
+  - ufw default deny incoming
+  - ufw default allow outgoing
+  - ufw allow OpenSSH
+  - ufw allow 80/tcp
+  - ufw allow 443/tcp
+  - ufw --force enable

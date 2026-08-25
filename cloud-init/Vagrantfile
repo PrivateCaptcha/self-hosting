@@ -1,0 +1,26 @@
+ENV["VAGRANT_EXPERIMENTAL"] ||= "cloud_init,disks"
+
+Vagrant.configure("2") do |config|
+  # config.env.enable # enable .env support plugin (it will let us easily enable cloud_init support)
+
+  config.vm.define "private-captcha"
+
+  # Name for the box image downloaded from the box_url
+  # it will be used to create a folder inside ~/.vagrant.d/boxes to avoid re-downloading
+  config.vm.box = "ubuntu/jammy64"
+
+  config.vm.network :private_network, ip: "192.168.56.11"
+
+  config.vm.provider "virtualbox" do |v|
+    v.name = "Private Captcha"
+    v.memory = 4096
+    v.cpus = 2
+  end
+
+  # cloud-init script
+  config.vm.cloud_init :user_data do |cloud_init|
+    # With Ubuntu cloud images you have to use cloud_init to get an access
+    cloud_init.content_type = "text/cloud-config"
+    cloud_init.path = "userdata-local.yml"
+  end
+end
