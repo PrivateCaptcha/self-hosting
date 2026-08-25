@@ -2,6 +2,7 @@ services:
   privatecaptcha:
     image: ghcr.io/privatecaptcha/privatecaptcha:v1.42.0
     read_only: true
+    restart: unless-stopped
     depends_on:
       migration:
         condition: service_completed_successfully
@@ -70,6 +71,7 @@ services:
 
   postgres:
     image: postgres:18-alpine
+    restart: unless-stopped
     environment:
       PGDATA: /var/lib/postgresql/18/main
       POSTGRES_DB: privatecaptcha
@@ -88,6 +90,7 @@ services:
 
   clickhouse:
     image: clickhouse/clickhouse-server:25.12.11-alpine
+    restart: unless-stopped
     environment:
       CLICKHOUSE_DB: privatecaptcha
       CLICKHOUSE_SKIP_USER_SETUP: 1
