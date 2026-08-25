@@ -2,6 +2,7 @@
 <clickhouse>
   <profiles>
     <default>
+      <session_timezone>UTC</session_timezone>
       <async_insert>1</async_insert>
       <wait_for_async_insert>1</wait_for_async_insert>
       <!-- This is needed so that toStartOfMonth() returned DateTime instead of Date -->
