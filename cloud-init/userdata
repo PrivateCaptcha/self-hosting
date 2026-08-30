@@ -16,6 +16,9 @@ write_files:
       # SMTP_ENDPOINT=smtp://smtp.example.com:587
       # SMTP_USERNAME=username
       # SMTP_PASSWORD=password
+      
+      # to match Caddyfile below
+      PC_RATE_LIMIT_HEADER=X-Real-Ip
 
   - path: /etc/docker/daemon.json
     defer: true
