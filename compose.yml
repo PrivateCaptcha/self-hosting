@@ -89,7 +89,7 @@ services:
       - postgres_data_volume:/var/lib/postgresql/18/main
 
   clickhouse:
-    image: clickhouse/clickhouse-server:25.12.11-alpine
+    image: clickhouse/clickhouse-server:26.8.2-alpine
     restart: unless-stopped
     environment:
       CLICKHOUSE_DB: privatecaptcha
