@@ -16,6 +16,14 @@ else
   email_from="no-reply@privatecaptcha.local"
 fi
 
+edge_signing_private_key="$(openssl genpkey \
+  -algorithm EC \
+  -pkeyopt ec_paramgen_curve:prime256v1 \
+  -pkeyopt ec_param_enc:named_curve)" || exit 1
+
+edge_signing_public_key="$(printf '%s\n' "$edge_signing_private_key" \
+  | openssl pkey -pubout)" || exit 1
+
 cat <<EOF
 # Required
 STAGE=prod
@@ -28,6 +36,8 @@ PC_USER_FINGERPRINT_KEY=$(openssl rand -hex 64)
 PC_API_SALT=$(openssl rand -hex 64)
 PC_XSRF_KEY=$(openssl rand -hex 64)
 PC_ID_HASH_SALT=$(openssl rand -hex 64)
+PC_EDGE_TOKEN_SIGNING_PRIVATE_KEY='$edge_signing_private_key'
+PC_EDGE_TOKEN_SIGNING_PUBLIC_KEY='$edge_signing_public_key'
 
 # Replace these values with your SMTP provider settings in production.
 SMTP_ENDPOINT=localhost:1025
