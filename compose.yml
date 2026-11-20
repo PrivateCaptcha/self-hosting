@@ -70,7 +70,7 @@ services:
       - clickhouse_network
 
   postgres:
-    image: postgres:18-alpine
+    image: postgres:19-alpine
     restart: unless-stopped
     environment:
       PGDATA: /var/lib/postgresql/18/main
